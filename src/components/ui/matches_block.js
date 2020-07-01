@@ -22,7 +22,7 @@ const MatchesBlock =({match})=>{
                         <div className='icon' style={{background:`url(/images/team_icons/${match.awayThmb}.png)`}} ></div>
                         <div className='team_name'>{match.away} </div>
                     </div>
-                    <div className='right'>
+                    <div className='right' >
                         {match.final ? match.resultAway : '-' }
                     </div>
                 </div>
@@ -30,5 +30,5 @@ const MatchesBlock =({match})=>{
         </div>
     )
 }
-
+// ndf?
 export default MatchesBlock

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {fireBAseMatches} from '../../../firebase'
 import {firebaseLooper, reverseArray} from '../../ui/misc'
 import MatchesBlock from '../../ui/matches_block'
-
 import Slide from 'react-reveal'
 
 class Blocks extends Component {
