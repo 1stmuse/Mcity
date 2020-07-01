@@ -30,5 +30,4 @@ const MatchesBlock =({match})=>{
         </div>
     )
 }
-// ndf?
 export default MatchesBlock
