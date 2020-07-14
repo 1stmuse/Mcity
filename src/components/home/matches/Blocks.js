@@ -23,7 +23,7 @@ class Blocks extends Component {
     showMatches =(matches)=>(
         matches ? 
             matches.map(match=>(
-                <Slide left key={match.id} >
+                <Slide bottom key={match.id} >
                     <div className='item'>
                         <div className='wrapper'>
                             <MatchesBlock match={match} />
