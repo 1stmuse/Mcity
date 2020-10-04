@@ -3,6 +3,8 @@ import Fade from 'react-reveal/Fade'
 import FormField from '../../ui/formFields'
 import {validate} from '../../ui/misc'
 
+import {fireBasePromotions} from '../../../firebase'
+
 class Enrol extends Component {
     state={
         formError:false,
@@ -37,12 +39,47 @@ class Enrol extends Component {
             formIsValid = this.state.formData[key].valid && formIsValid
         }
         if(formIsValid){
-
+            fireBasePromotions.orderByChild('email').equalTo(dataToSubmit.email).once('value')
+            .then(snapshot=>{
+                if(snapshot.val() ===null){
+                    fireBasePromotions.push(dataToSubmit)
+                    this.resetFormSuccess(true)
+                }else{
+                    this.resetFormSuccess(false)
+                }
+            })
         }else{
             this.setState({
                 formError: true
             })
         }
+
+    }
+
+    resetFormSuccess=(type)=>{
+        const newFormData = {...this.state.formData}
+
+        for(let key in newFormData){
+            newFormData[key].value =''
+            newFormData[key].valid =false
+            newFormData[key].validationMessage =''
+        }
+
+        this.setState({
+            formError:false,
+            formData: newFormData,
+            formSuccess:type ? 'Congratulations' : 'Already on the database'
+        })
+
+        this.successMessage()
+    }
+
+    successMessage=()=>{
+        setTimeout(()=>{
+            this.setState({
+                formSuccess:''
+            })
+        },2000)
     }
 
     updateForm=(element)=>{
@@ -81,6 +118,9 @@ class Enrol extends Component {
                                     something is wrong
                                 </div> : null
                             }
+                            <div className='success_label'>
+                                {this.state.formSuccess}
+                            </div>
                             <button onClick={(event)=>this.submitForm(event)}>
                                 Enroll
                             </button>

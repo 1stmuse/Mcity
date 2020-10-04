@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/app'
 import 'firebase/database'
+import 'firebase/auth'
 
 
 const firebaseConfig = {
@@ -18,8 +19,10 @@ firebase.initializeApp(firebaseConfig);
 
 const fireDB = firebase.database()
 const fireBAseMatches = fireDB.ref('matches')
+const fireBasePromotions = fireDB.ref('promotions')
 
 export {
     firebase,
-    fireBAseMatches
+    fireBAseMatches,
+    fireBasePromotions
 }
