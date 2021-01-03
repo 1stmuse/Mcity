@@ -46,7 +46,7 @@ const FormField =({id, formdata, change})=>{
                         }
                         <select
                             value={formdata.value}
-                            onChange={(event)=> change(event, id)}
+                            onChange={(event)=> change({event, id})}
                         >
                             <option value=''>Select one</option>
                             {

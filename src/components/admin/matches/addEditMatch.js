@@ -206,6 +206,57 @@ export default class AddEditMatch extends Component {
         })
     }
 
+    submitForm(event){
+        event.preventDefault();
+        
+        let dataToSubmit = {};
+        let formIsValid = true;
+
+        for(let key in this.state.formdata){
+            dataToSubmit[key] = this.state.formdata[key].value;
+            formIsValid = this.state.formdata[key].valid && formIsValid;
+        }
+
+        this.state.teams.forEach((team)=>{
+            if(team.shortName === dataToSubmit.local ){
+                dataToSubmit['localThmb'] = team.thmb
+            }
+            if(team.shortName === dataToSubmit.away ){
+                dataToSubmit['awayThmb'] = team.thmb
+            }
+        })
+
+        if(formIsValid){
+           if(this.state.formType === 'Edit Match'){
+                fireDB.ref(`matches/${this.state.matchId}`)
+                .update(dataToSubmit).then(()=>{ 
+                    this.successForm('Updated correctly')
+                }).catch(e=> this.setState({formError:true}))
+           }else{
+                fireBAseMatches.push(dataToSubmit).then(()=>{
+                    this.props.history.push('/admin_matches')
+                }).catch(e=>this.setState({formError:true}))
+           }
+
+        } else {
+            this.setState({
+                formError: true
+            })
+        }
+    }
+
+    successForm(message){
+        this.setState({
+            formSuccess:message
+        })
+
+        setTimeout(()=>{
+            this.setState({
+                formSuccess:''
+            })
+        }, 2000)
+    }
+
     componentDidMount(){
         const matchId = this.props.match.params.id
         const getTeams = (match, type) =>{
@@ -226,7 +277,7 @@ export default class AddEditMatch extends Component {
         }
 
         if(!matchId){
-            // Add match
+            getTeams(false, 'Add Match')
         }else{
             fireDB.ref(`matches/${matchId}`).once('value')
             .then((snapshot)=>{
@@ -245,7 +296,7 @@ export default class AddEditMatch extends Component {
                     </h2>
 
                     <div>
-                        <form onSubmit={(event)=>this.submitFotm(event)} >
+                        <form onSubmit={(event)=>this.submitForm(event)} >
                             <FormField
                                 id={'date'}
                                 formdata={this.state.formdata.date}
@@ -325,7 +376,7 @@ export default class AddEditMatch extends Component {
                             }
 
                             <div className='admin_submit'>
-                                <button onClick={(event)=> this. submitFotm(event)} >
+                                <button onClick={(event)=> this. submitForm(event)} >
                                     {this.state.formType}
                                 </button>
                             </div>
