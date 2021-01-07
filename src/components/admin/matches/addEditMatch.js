@@ -270,7 +270,6 @@ export default class AddEditMatch extends Component {
                         value:childsnapshot.val().shortName
                     })
                 })
-                console.log(match)
 
                 this.updateFields(match, teamOptions, teams, type, matchId)
             })
