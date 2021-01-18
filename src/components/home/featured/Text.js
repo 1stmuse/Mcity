@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {easePolyOut, easeSinInOut} from 'd3-ease'
+import {easePolyOut} from 'd3-ease'
 import Animate from 'react-move/Animate'
 
 import FeaturedPlayer from '../../../Resources/images/featured_player.png'

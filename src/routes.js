@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom'
+import {Switch} from 'react-router-dom'
 
 import PrivateRoute from './components/authRoutes/privateRoute'
 import PublicRoute from './components/authRoutes/publicRoute'
@@ -11,6 +11,7 @@ import AdminMatches from './components/admin/matches'
 import AddEditMatch from './components/admin/matches/addEditMatch'
 import AdminPlayers from './components/admin/players/index'
 import AddEditPlayers from './components/admin/players/AddEditPlayers'
+import TheTeam from './components/theTeam/index'
 
 
 const Routes = (props)=> {
@@ -27,9 +28,8 @@ const Routes = (props)=> {
         <PrivateRoute {...props} exact path='/dashboard' component={DashBoard} />
         {/* <Route exact path='/sign_in' component={SignIn}/> */}
         <PublicRoute {...props} restricted={true}  exact path='/sign_in' component={SignIn} />
+        <PublicRoute {...props} restricted={false} exact component={TheTeam} path='/the_team'/>
         <PublicRoute {...props} restricted={false} exact component={Home} path='/'  />
-        {/* <Route exact path='/dashboard' component={DashBoard}/> */}
-        {/* <Route exact component={Home} path='/' /> */}
       </Switch>
     </Layout>
   );
