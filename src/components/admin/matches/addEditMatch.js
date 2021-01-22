@@ -375,7 +375,7 @@ export default class AddEditMatch extends Component {
                             }
 
                             <div className='admin_submit'>
-                                <button onClick={(event)=> this. submitForm(event)} >
+                                <button onClick={(event)=> this.submitForm(event)} >
                                     {this.state.formType}
                                 </button>
                             </div>
