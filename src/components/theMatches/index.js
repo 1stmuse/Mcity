@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import CircularProgress from '@material-ui/core/CircularProgress'
 
 import {fireBAseMatches} from '../../firebase'
 import {firebaseLooper, reverseArray} from '../ui/misc'
@@ -42,7 +41,7 @@ export default class TheMatches extends Component {
 
     showResult =(result) =>{
         const list = this.state.matches.filter(match=>{
-            return match.final === result
+            return match.result === result
         })
 
         this.setState({
